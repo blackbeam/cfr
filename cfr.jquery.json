@@ -1,6 +1,6 @@
 {
     "name": "cfr",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "title": "Chunked file read",
     "author": {
         "name": "AnatolyI"

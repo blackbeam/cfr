@@ -74,6 +74,7 @@
                             if (data.opts.onEnd && 'function' === typeof data.opts.onEnd) {
                                 data.opts.onEnd.call($this[0], file);
                             }
+                            data.lastFileName = null;
                         } else {
                             var blob = file[sliceName](offset, offset + data.opts.chunkSize);
                             var reader = new window.FileReader();
@@ -90,6 +91,7 @@
                                                 if (data.opts.onCancel && 'function' === typeof data.opts.onCancel) {
                                                     data.opts.onCancel.call($this[0], file);
                                                 }
+                                                data.lastFileName = null;
                                             }
                                         });
                                     } else {
@@ -100,6 +102,7 @@
                                         if (data.opts.onEnd && 'function' === typeof data.opts.onEnd) {
                                             data.opts.onEnd.call($this[0], file);
                                         }
+                                        data.lastFileName = null;
                                     }
                                 }
                             };
