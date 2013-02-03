@@ -8,17 +8,20 @@
                 $('input[type=file]').cfr({
                     onStart: function (f) {
                         $('.output').html('');
-                        $('.output').append('<h3>Start reading file '+(f.fileName || f.name)+'</h3>');
+                        $('.output').append('<h3>Started reading file '+(f.fileName || f.name)+'</h3>');
                     },
-                    onChunk: function (c, s, cn, cs, cb) {
-                        $('.output').append('<p>Chunk '+cn+' of '+cs+' with size '+s+' and content <pre style="background-color: #f9f9f9;">'+$('<span>').text(c).html()+'</pre></p><hr>');
+                    onChunk: function (c, s, cn, cs, f, cb) {
+                        $('.output').append('<p>Chunk '+cn+'/'+cs+' of file '+f.name+' with size '+s+' and content: <pre style="background-color: #f9f9f9;">'+$('<span>').text(c).html()+'</pre></p><hr>');
                         cb();
                     },
+                    onFinish: function (f) {
+                        $('.output').append('<h3>Finished reading file '+(f.fileName || f.name)+'</h3>')
+                    },
                     onEnd: function (f) {
-                        $('.output').append('<h3>End reading file '+(f.fileName || f.name)+'</h3>');
+                        $('.output').append('<h3>Ended reading file '+(f.fileName || f.name)+'</h3>');
                     },
                     onCancel: function (f) {
-                        $('.output').append('<h3>Cancel reading file '+(f.fileName || f.name)+'</h3>');
+                        $('.output').append('<h3>Canceled reading file '+(f.fileName || f.name)+'</h3>');
                     },
                     chunkSize: 100,
                     readFunc: 'readAsText',

@@ -68,8 +68,11 @@
                     var read = function (chunkNum) {
                         var offset = data.opts.chunkSize * (chunkNum - 1);
                         if (offset >= fileSize) {
+                            if (data.opts.onFinish && 'function' === typeof data.opts.onFinish) {
+                                data.opts.onFinish.call($this[0], file);
+                            }
                             if (data.opts.onEnd && 'function' === typeof data.opts.onEnd) {
-                                data.opts.onEnd.call($this, file);
+                                data.opts.onEnd.call($this[0], file);
                             }
                         } else {
                             var blob = file[sliceName](offset, offset + data.opts.chunkSize);
@@ -80,19 +83,22 @@
                                     chunk = (data.opts.filter && 'function' === typeof data.opts.filter) ? data.opts.filter(chunk) : chunk;
                                     var chunkSize = blob.size || blob.fileSize;
                                     if (! data.cancelled) {
-                                        data.opts.onChunk.call($this, chunk, chunkSize, chunkNum, chunkCount, function (cancel) {
+                                        data.opts.onChunk.call($this[0], chunk, chunkSize, chunkNum, chunkCount, file, function (cancel) {
                                             if (! cancel) {
                                                 read(++chunkNum);
                                             } else {
                                                 if (data.opts.onCancel && 'function' === typeof data.opts.onCancel) {
-                                                    data.opts.onCancel.call($this, file);
+                                                    data.opts.onCancel.call($this[0], file);
                                                 }
                                             }
                                         });
                                     } else {
                                         if (data.opts.onCancel && 'function' === typeof data.opts.onCancel) {
                                             data.cancelled = false;
-                                            data.opts.onCancel.call($this, file);
+                                            data.opts.onCancel.call($this[0], file);
+                                        }
+                                        if (data.opts.onEnd && 'function' === typeof data.opts.onEnd) {
+                                            data.opts.onEnd.call($this[0], file);
                                         }
                                     }
                                 }
@@ -101,7 +107,7 @@
                         }
                     };
                     if (data.opts.onStart && 'function' === typeof data.opts.onStart) {
-                        data.opts.onStart.call($this, file);
+                        data.opts.onStart.call($this[0], file);
                     }
                     read(chunk);
                 });
