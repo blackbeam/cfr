@@ -1,0 +1,21 @@
+{
+    "name": "cfr",
+    "version": "0.1.0",
+    "title": "Chunked file read",
+    "author": {
+        "name": "AnatolyI"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "description": "Read file chunk by chunk via HTML5 FileReader API.",
+    "keywords": ["file", "FileReader", "HTML5"],
+    "homepage": "https://github.com/blackbeam/cfr",
+    "docs": "https://github.com/blackbeam/cfr",
+    "dependencies": {
+        "jquery": ">=1.6"
+    }
+}

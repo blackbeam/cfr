@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+        <script src="jquery.cfr.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('input[type=file]').cfr({
+                    onStart: function (f) {
+                        $('.output').html('');
+                        $('.output').append('<h3>Start reading file '+(f.fileName || f.name)+'</h3>');
+                    },
+                    onChunk: function (c, s, cn, cs, cb) {
+                        $('.output').append('<p>Chunk '+cn+' of '+cs+' with size '+s+' and content <pre style="background-color: #f9f9f9;">'+$('<span>').text(c).html()+'</pre></p><hr>');
+                        cb();
+                    },
+                    onEnd: function (f) {
+                        $('.output').append('<h3>End reading file '+(f.fileName || f.name)+'</h3>');
+                    },
+                    onCancel: function (f) {
+                        $('.output').append('<h3>Cancel reading file '+(f.fileName || f.name)+'</h3>');
+                    },
+                    chunkSize: 100,
+                    readFunc: 'readAsText',
+                    filter: null
+                });
+                $('input[value=remove]').click(function () {
+                    $('input[type=file]').cfr('remove');
+                });
+                $('input[value=cancel]').click(function () {
+                    $('input[type=file]').cfr('cancel');
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <input type="file"/><input type="button" value="remove"/><input type="button" value="cancel"/>
+        <div class="output"></div>
+    </body>
+</html>
