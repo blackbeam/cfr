@@ -109,6 +109,7 @@
                             reader[data.opts.readFunc](blob);
                         }
                     };
+                    data.cancelled = false;
                     if (data.opts.onStart && 'function' === typeof data.opts.onStart) {
                         data.opts.onStart.call($this[0], file);
                     }
@@ -147,3 +148,4 @@
         }
     };
 }).call(window, window.jQuery);
+
