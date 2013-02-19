@@ -91,6 +91,9 @@
                                                 if (data.opts.onCancel && 'function' === typeof data.opts.onCancel) {
                                                     data.opts.onCancel.call($this[0], file);
                                                 }
+                                                if (data.opts.onEnd && 'function' === typeof data.opts.onEnd) {
+                                                    data.opts.onEnd.call($this[0], file);
+                                                }
                                                 data.lastFileName = null;
                                             }
                                         });
