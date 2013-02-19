@@ -34,6 +34,7 @@ If you override a `readFunc` you also need override a default `filter` or pass i
   * `file` - [File](https://developer.mozilla.org/en-US/docs/DOM/File) object.
 * `onEnd(file)` - will be called after `onCancel` or `onFinish`
   * `file` - [File](https://developer.mozilla.org/en-US/docs/DOM/File) object.
+* `onNotSupported()` - will be called on plugin initialization if FileReader API is not supported.
 
 ### Methods
 

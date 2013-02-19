@@ -118,6 +118,10 @@
                     }
                     read(chunk);
                 });
+            } else {
+                if (data.opts.onNotSupported && 'function' === typeof data.opts.onNotSupported) {
+                    data.opts.onNotSupported.call($this[0]);
+                }
             }
 
             return $this;

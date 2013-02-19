@@ -23,6 +23,9 @@
                     onCancel: function (f) {
                         $('.output').append('<h3>Canceled reading file '+(f.fileName || f.name)+'</h3>');
                     },
+                    onNotSupported: function () {
+                        alert('FileReader API is not supported');
+                    },
                     chunkSize: 100,
                     readFunc: 'readAsText',
                     filter: null
